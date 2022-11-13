@@ -62,7 +62,7 @@
   &__overlay {
     position: fixed;
     background-color: #fff;
-    top: 0rem;
+    top: 0;
     left: 0;
     width: auto;
     padding: 1rem;
@@ -73,7 +73,6 @@
 
     @media screen and (min-width: 768px) {
       padding: 6rem;
-
     }
   }
 
@@ -171,10 +170,17 @@
         align-items: center;
         cursor: pointer;
 
+        &:hover svg,
+        &:hover p {
+          fill: rgba(235, 87, 87, 0.9);
+          color: rgba(235, 87, 87, 0.9);
+        }
+
         p {
           font-family: "Mulish", sans-serif;
           color: #4f4f4f;
           font-size: 0.875rem;
+          transition: 200ms all;
         }
 
         svg {
@@ -182,6 +188,7 @@
           height: 25px;
           fill: #4f4f4f;
           padding-right: 0.5rem;
+          transition: 200ms all;
         }
       }
     }
@@ -315,19 +322,4 @@
   z-index: 1;
   cursor: pointer;
   transition: 700ms;
-}
-
-.overlay-enter {
-  top: -20rem
-}
-.overlay-enter-active {
-  top: 0;
-  transition: ease 700ms;
-}
-.overlay-exit {
-  top: 0;
-}
-.overlay-exit-active {
-  top: -30rem;
-  transition: ease 700ms;
 }

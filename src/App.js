@@ -6,22 +6,23 @@ import "./App.scss";
 import Data from "./assets/stays.json";
 
 function App() {
-  const [search, setSearch] = useState(0);
-  const [filter, setFilter] = useState({
+
+  const initialFilters = {
     location: "Helsinki",
     guests: {
       adults: 1,
       children: 0,
     },
-  });
-
+  };
+  const [search, setSearch] = useState(0);
+  const [filter, setFilter] = useState(initialFilters);
   const [stays, setStays] = useState([]);
 
    useEffect(() => {
-    if(search === 1){
-      setStays(stays.filter((item) => item.city === filter.location && filter.guests.adults + filter.guests.children <= item.maxGuests));
-      setSearch(0);
-    }
+     if (search === 1) {
+       setStays(stays.filter((item) => item.city === filter.location && filter.guests.adults + filter.guests.children <= item.maxGuests));
+       setSearch(0);
+     }
   }, [filter.guests.adults, filter.guests.children, filter.location, search, stays]);
 
   useEffect(() => {

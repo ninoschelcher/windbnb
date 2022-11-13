@@ -1,8 +1,19 @@
 import "../../styles/organisms/LocationOverview.scss";
 
 import { AiFillStar } from "react-icons/ai";
+import { motion } from "framer-motion";
 
 const LocationOverview = ({ stays }) => {
+  const container = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 },
+  };
+
+  const item = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 },
+  };
+
   return (
     <section className="location-overview">
       <div className="location-overview__title-container">
@@ -10,10 +21,16 @@ const LocationOverview = ({ stays }) => {
         <p className="location-overview__location-amount">{stays.length} stays</p>
       </div>
 
-      <div className="location-overview__stays">
+      <motion.div
+        className="location-overview__stays"
+        style={stays.length >= 1 ? { display: "grid" } : { display: "flex" }}
+        initial="hidden"
+        animate="show"
+        variants={container}
+      >
         {stays.length >= 1 ? (
           stays.map((stay) => (
-            <article key={stay.id}>
+            <motion.article key={stay.id} variants={item}>
               <div className="location-overview__stay-image-container">
                 <img
                   src={stay.photo}
@@ -36,14 +53,16 @@ const LocationOverview = ({ stays }) => {
                 </p>
               </div>
               <h2 className="location-overview__stay-title">{stay.title}</h2>
-            </article>
+            </motion.article>
           ))
         ) : (
-          <h2 className="location-overview__no-criteria">
-            Oops, there were no rooms found with this criteria!
-          </h2>
+          <>
+            <h2 className="location-overview__no-criteria">
+              Oops, there were no rooms found with this criteria!
+            </h2>
+          </>
         )}
-      </div>
+      </motion.div>
     </section>
   );
 };
